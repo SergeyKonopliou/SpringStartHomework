@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="bread" class="by.homework.SpringFirstAppOrder.Product">
+		<constructor-arg name="name" value="Bread"/>
+		<constructor-arg name="price" value="1.2"/>
+	</bean>
+
+	<bean id="butter" class="by.homework.SpringFirstAppOrder.Product">
+		<constructor-arg name="price" value="3.4"/>
+		<constructor-arg name="name" value="Butter"/>
+	</bean>
+	
+	<bean id="cheese" class="by.homework.SpringFirstAppOrder.Product">
+		<constructor-arg name="name" value="Cheese"/>
+		<constructor-arg name="price" value="12.5"/>
+	</bean>
+	
+	<bean id="tea" class="by.homework.SpringFirstAppOrder.Product">
+		<constructor-arg name="name" value="Tea"/>
+		<constructor-arg name="price" value="5.7"/>
+	</bean>
+	
+	<bean id="chock" class="by.homework.SpringFirstAppOrder.Product">
+		<constructor-arg name="name" value="Chokolate"/>
+		<constructor-arg name="price" value="4.4"/>
+	</bean>
+	
+	<bean id="order1" class="by.homework.SpringFirstAppOrder.Order">
+		<property name="numberOrder" value="1"></property>
+		<property name="totalCost" value="0.0"></property>
+		<property name="orderList">
+			<list>
+				<ref bean="bread"/>
+				<ref bean="butter"/>
+				<ref bean="cheese"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="order2" class="by.homework.SpringFirstAppOrder.Order">
+	<property name="numberOrder" value="2"></property>
+	<property name="totalCost" value="0.0"></property>
+		<property name="orderList">
+			<list>
+				<ref bean="tea"/>
+				<ref bean="chock"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="order3" class="by.homework.SpringFirstAppOrder.Order">
+	<property name="numberOrder" value="3"></property>
+	<property name="totalCost" value="0.0"></property>
+		<property name="orderList">
+			<list>
+				<ref bean="bread"/>
+				<ref bean="butter"/>
+				<ref bean="cheese"/>
+				<ref bean="tea"/>
+				<ref bean="chock"/>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<bean id="seller1" class="by.homework.SpringFirstAppOrder.Seller">
+		<property name="name" value="Cris"></property>
+		<property name="order">
+			<list></list>
+		</property>
+	</bean>
+	<bean id="seller2" class="by.homework.SpringFirstAppOrder.Seller">
+		<property name="name" value="Mike"></property>
+		<property name="order">
+			<list></list>
+		</property>
+	</bean>
+	
+</beans>
