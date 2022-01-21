@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.google.protobuf.ServiceException;
@@ -28,7 +27,7 @@ public class ProductService {
 		try {
 			products = dao.getAll();
 		} catch (DaoException e) {
-			throw new ServiceException("Проблемы с загрузкой товаров из БД " + e.getMessage(), e);
+			throw new ServiceException("Problems with loading all products from DB service method " + e.getMessage(), e);
 		}
 		return products;
 	}
@@ -42,7 +41,7 @@ public class ProductService {
 		try {
 			products = dao.findByName(name);
 		} catch (DaoException e) {
-			throw new ServiceException("Проблемы с поиском товара в БД " + e.getMessage(), e);
+			throw new ServiceException("Problems with serching product by name from DB service method " + e.getMessage(), e);
 		}
 		return products;
 	}
@@ -54,7 +53,7 @@ public class ProductService {
 		try {
 			dao.add(object);
 		} catch (DaoException e) {
-			throw new ServiceException("Проблемы с добавлением товара в БД " + e.getMessage(), e);
+			throw new ServiceException("Problems with adding new products to DB service method  " + e.getMessage(), e);
 		}
 	}
 
@@ -65,7 +64,7 @@ public class ProductService {
 		try {
 			dao.delete(name);
 		} catch (DaoException e) {
-			throw new ServiceException("Проблемы с удалением товара в БД " + e.getMessage(), e);
+			throw new ServiceException("Problems with deleting product from DB service method " + e.getMessage(), e);
 		}
 	}
 
@@ -76,7 +75,7 @@ public class ProductService {
 		try {
 			dao.update(nameNew, priceNew);
 		} catch (DaoException e) {
-			throw new ServiceException("Проблемы с изменением товара в БД " + e.getMessage(), e);
+			throw new ServiceException("Problems with updating product by name in DB service method " + e.getMessage(), e);
 		}
 	}
 }

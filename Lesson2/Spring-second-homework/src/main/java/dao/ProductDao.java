@@ -18,27 +18,23 @@ import model.Product;
 
 @Repository
 public class ProductDao {
-	
+
 	@Autowired
 	private MysqlConfigConnectManager manager;
 
-
 	private static final String SQL_DELETE_GOOD_QUERY = "DELETE FROM products WHERE name = ?";
 	private static final String SQL_UPDATE_GOOD_QUERY = "UPDATE products SET name = ?,price = ? WHERE name = ?";
-	private static final String SQL_UPDATE_GOOD_QUERY_WITHOUT_PRICE = "UPDATE products SET name = ? WHERE name = ?";
-	private static final String SQL_UPDATE_GOOD_QUERY_WITHOUT_NAME = "UPDATE products SET price = ? WHERE name = ?";
 	private static final String SQL_ADD_GOOD_QUERY = "INSERT INTO products(name, price) VALUES (?,?)";
 	private static final String SQL_FIND_GOOD_LIKE_QUERY = "SELECT * FROM products WHERE name LIKE ?";
 	private static final String SQL_SELECT_ALL_GOOD_QUERY = "SELECT * FROM products";
-	
+
 	/**
 	 * Метод получения всех товаров и базы данных
 	 */
 	public List<Product> getAll() throws DaoException {
 
 		List<Product> newProducts = new ArrayList<>();
-		try (Connection connection = manager.connection();
-				Statement statement = connection.createStatement();) {
+		try (Connection connection = manager.connection(); Statement statement = connection.createStatement();) {
 			ResultSet resultSet = statement.executeQuery(SQL_SELECT_ALL_GOOD_QUERY);
 			while (resultSet.next()) {
 				Long id = resultSet.getLong("id");
@@ -47,7 +43,7 @@ public class ProductDao {
 				newProducts.add(new Product(id, name, price));
 			}
 		} catch (SQLException | DBConnectException e) {
-			throw new DaoException("Ошибка в методе получения всех товаров " + e.getMessage(), e);
+			throw new DaoException("Error in getting all items dao method " + e.getMessage(), e);
 		}
 
 		return newProducts;
@@ -70,7 +66,7 @@ public class ProductDao {
 				foundGoods.add(new Product(id, name, price));
 			}
 		} catch (SQLException | DBConnectException e) {
-			throw new DaoException("Возникла ошибка при поиске товара по наименованию " + e.getMessage(), e);
+			throw new DaoException("Error in finding by name dao method " + e.getMessage(), e);
 		}
 		return foundGoods;
 	}
@@ -86,7 +82,7 @@ public class ProductDao {
 			statement.setDouble(2, product.getPrice());
 			statement.executeUpdate();// executeQuery() здесь не работает!!!
 		} catch (SQLException | DBConnectException e) {
-			throw new DaoException("Возникла ошибка при добавлении нового товара в БД " + e.getMessage(), e);
+			throw new DaoException("Error in adding new product to DB dao method " + e.getMessage(), e);
 		}
 
 	}
@@ -98,22 +94,14 @@ public class ProductDao {
 
 		try (Connection connection = manager.connection();) {
 			PreparedStatement statement;
-
-			if (!newPrice.isEmpty() && !newName.isEmpty()) {
-				statement = connection.prepareStatement(SQL_UPDATE_GOOD_QUERY);
-				statement.setString(1, newName);
-				statement.setDouble(2, Double.parseDouble(newPrice));
-			} else if (!newName.isEmpty()) {
-				statement = connection.prepareStatement(SQL_UPDATE_GOOD_QUERY_WITHOUT_PRICE);
-				statement.setString(1, newName);
-			} else {
-				statement = connection.prepareStatement(SQL_UPDATE_GOOD_QUERY_WITHOUT_NAME);
-				statement.setDouble(1, Double.parseDouble(newPrice));
-			}
+			statement = connection.prepareStatement(SQL_UPDATE_GOOD_QUERY);
+			statement.setString(1, newName);
+			statement.setDouble(2, Double.parseDouble(newPrice));
+			statement.setString(3, newName);
 			statement.executeUpdate();
 			statement.close();
-		} catch (SQLException | DBConnectException e) {
-			throw new DaoException("Возникла ошибка в методе updateGood() " + e.getMessage(), e);
+		} catch (SQLException | DBConnectException | NullPointerException e) {
+			throw new DaoException("Error in updating product by name dao method " + e.getMessage(), e);
 		}
 	}
 
@@ -127,7 +115,7 @@ public class ProductDao {
 			statement.setString(1, name);
 			statement.executeUpdate();
 		} catch (SQLException | DBConnectException e) {
-			throw new DaoException("Возникла ошибка при удалении товара " + e.getMessage(), e);
+			throw new DaoException("Error in deleting product by name dao method " + e.getMessage(), e);
 		}
 	}
 }

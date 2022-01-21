@@ -22,7 +22,7 @@ public class ProductAnnotationAspect {
 
 	@Around("callTimedAnnotation()")
 	public Object calculateMethodWorkTime(ProceedingJoinPoint proceedingJoinPoint) {
-		System.out.println("Method [" + proceedingJoinPoint.getSignature().getName() + "] start");
+		System.out.println("Method [" + proceedingJoinPoint.getSignature().toString() + "] start");
 		System.out.println("Method's arguments : " + Arrays.toString(proceedingJoinPoint.getArgs()));
 		Long workTime = (long) 0;
 		// если не возвращать Object при проодолжении вызова метода
@@ -36,7 +36,7 @@ public class ProductAnnotationAspect {
 			System.out.println(e);
 		}
 		workTime = System.currentTimeMillis() - currentTime;
-		System.out.println("Method [" + proceedingJoinPoint.getSignature() + "] end. Runtime,ms " + workTime);
+		System.out.println("Method [" + proceedingJoinPoint.getSignature().getName() + "] end. Runtime,ms " + workTime);
 		return object;
 	}
 }
