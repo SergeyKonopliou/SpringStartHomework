@@ -18,8 +18,12 @@ public class App
 {
     public static void main( String[] args )
     {
-//        AbstractApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
-    	AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+	//only with annotation configurations
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+        
+        //annotation + xml configurations
+//    	AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        
         ProductService servise = context.getBean("productService",ProductService.class);
         List<Product> products = null;
         try {
