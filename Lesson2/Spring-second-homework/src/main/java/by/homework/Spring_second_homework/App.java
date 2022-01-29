@@ -2,7 +2,6 @@ package by.homework.Spring_second_homework;
 
 import java.util.List;
 
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -19,15 +18,19 @@ public class App
 {
     public static void main( String[] args )
     {
-//        AbstractApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
-    	AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
-        ProductService p = context.getBean("productService",ProductService.class);
-        List<Product> prod = null;
+	//only with annotation configurations
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+        
+        //annotation + xml configurations
+//    	AbstractApplicationContext context = new ClassPathXmlApplicationContext("spring.xml");
+        
+        ProductService servise = context.getBean("productService",ProductService.class);
+        List<Product> products = null;
         try {
-			prod = (List<Product>) p.loadFindProductByName("Bike");
-			if(prod != null) {
+			products = (List<Product>) servise.loadFindProductByName("Bike");
+			if(products != null) {
 			System.out.println("Find product:");
-			prod.stream().forEach(System.out::println);
+			products.stream().forEach(System.out::println);
 			}else {
 			System.out.println("This product not found");
 			}
@@ -37,10 +40,10 @@ public class App
         
         
         try {
-			p.delete("Hammer");
+			servise.delete("Hammer");
 			System.out.println("Deleted");
-			prod = (List<Product>) p.loadAll();
-			prod.stream().forEach(System.out::println);
+			products = (List<Product>) servise.loadAll();
+			products.stream().forEach(System.out::println);
 		} catch (ServiceException e) {
 			System.out.println("Problems with deleted " + e.getMessage());
 		}
@@ -49,13 +52,23 @@ public class App
         product1.setName("Hammer");
         product1.setPrice(19.99);
         try {
-			p.add(product1);
+			servise.add(product1);
 			System.out.println("Added");
-			prod = (List<Product>) p.loadAll();
-			prod.stream().forEach(System.out::println);
+			products = (List<Product>) servise.loadAll();
+			products.stream().forEach(System.out::println);
 		} catch (ServiceException e) {
 			System.out.println("Problems with added " + e.getMessage());
 		}
+        
+        try {
+			servise.update("Hammer", "21.11");
+			System.out.println("Update");
+			products = (List<Product>) servise.loadAll();
+			products.stream().forEach(System.out::println);
+		} catch (ServiceException e) {
+			System.out.println("Problems with updated " + e.getMessage());
+		}
+        
     
         context.registerShutdownHook();
     }
