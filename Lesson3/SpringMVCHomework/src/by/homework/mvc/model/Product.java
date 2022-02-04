@@ -1,12 +1,17 @@
 package by.homework.mvc.model;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class Product {
 
 	private Long id;
+	@NotEmpty(message = "Product's name is empty")
 	private String name;
+	@Min(value = 0,message = "Price not be less than 0")
 	private double price;
 
 	public Product() {

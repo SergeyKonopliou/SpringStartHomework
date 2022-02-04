@@ -20,9 +20,6 @@
 
 	<div class="container">
 		<h2>Update product</h2>
-
-		<button type="button" class="btn btn-dark"
-			onclick="window.location.href = 'showall'">Back</button>
 	</div>
 
 	<div class="update">
@@ -30,12 +27,12 @@
 		<input type="hidden" name="id" value="${param.id}" />
 			<div class="row">
 				<div class="col">
-					<input type="text" name="update-nameNew" class="form-control"
-						placeholder="${param.name}">
+					<input type="text" name="name" class="form-control"
+						value ="${param.name}">
 				</div>
 				<div class="col">
-					<input type="text" name="update-priceNew" class="form-control"
-						placeholder="${param.price}">
+					<input type="text" name="price" class="form-control"
+						value ="${param.price}">
 				</div>
 			</div>
 			<div>

@@ -11,7 +11,7 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing 
 		infrastructure -->
-
+		
 	<!-- Включает анатационную модель в Spring MVC @Controller  -->
 	<annotation-driven />
 

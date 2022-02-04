@@ -21,10 +21,10 @@
 
 	<div class="search search_margin">
 		<div>
-			<form action="showall" method="get" class="form-inline search" 
+			<form action="products" method="get" class="form-inline search" 
 				name="searchForm">
 				<div class="form-group mx-sm-3 mb-2">
-					<input type="text" name="search-good" class="form-control"
+					<input type="text" name="search_product" class="form-control"
 						id="inputPassword2" placeholder="Name product">
 				</div>
 				<button type="submit" class="btn btn-primary mb-2">Search</button>
@@ -33,7 +33,7 @@
 
 		<div>
 			<button type="button" class="btn btn-dark"
-				onclick="window.location.href = 'index.jsp'">Back</button>
+				onclick="window.location.href = 'exit'">Exit</button>
 		</div>
 	</div>
 
@@ -49,11 +49,11 @@
 				<th scope="col"></th>
 			</tr>
 
-			<form action="add" method="get" name="addForm">
+			<form action="products/add" method="get" name="addForm">
 				<tr>
-					<td><input type="text" name="add-name"
+					<td><input type="text" name="name"
 						placeholder="Product name"></td>
-					<td><input type="text" name="add-price"
+					<td><input type="text" name="price"
 						placeholder="Product price"></td>
 					<td>
 						<button type="submit" class="btn btn-primary mb-2">Add new product</button>
@@ -68,14 +68,19 @@
 					<!-- 					<td><button onclick="myFunction()">Buy</button></td> -->
 					<td>
 						<button type="button" class="btn btn-primary mb-2"
-							onclick="window.location.href = 'updateProduct?id=${good.id}&name=${good.name}&price=${good.price}'">Update</button>
+							onclick="window.location.href = 'products/${good.id}/updateProduct?id=${good.id}&name=${good.name}&price=${good.price}'">Update</button>
 						<button type="button" class="btn btn-primary mb-2"
-							onclick="window.location.href = 'delete?id=${good.id}'">Delete</button>
+							onclick="window.location.href = 'products/delete?id=${good.id}'">Delete</button>
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
+
+	<c:if test="${flag}">
+		<button type="button" class="btn btn-primary mb-2"
+							onclick="window.location.href = 'products'">Return to catalog</button>
+	</c:if>
 
 	<br>
 	<div class="text-info bg-dark">

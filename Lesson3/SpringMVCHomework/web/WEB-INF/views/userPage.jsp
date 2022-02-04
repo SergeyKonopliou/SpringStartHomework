@@ -22,10 +22,10 @@
 		<div class="alert alert-success" role="alert">
 			<h4 class="alert-heading">You are successfully logged in!</h4>
 			<p>
-				<c:out value="Login: ${loginName}"></c:out>	
+				<c:out value="Login: ${user.name}"></c:out>	
 			</p>
 			<p>
-				<c:out value="Password: ${loginPass}"></c:out>
+				<c:out value="Password: ${user.password}"></c:out>
 			</p>
 			<hr>
 			<p class="mb-0">Now you can work with the catalog.</p>
@@ -33,8 +33,8 @@
 	</div>
 	<div class="referencies">
 		<ul>
-			<li><a href="showall"> Show catalog </a></li>
-			<li><a href="index.jsp"> Exit</a></li>
+			<li><a href="products"> Show catalog </a></li>
+			<li><a href="exit"> Exit</a></li>
 		</ul>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

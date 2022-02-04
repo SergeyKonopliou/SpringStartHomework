@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-" />
 <title>Main page</title>
 <link rel="icon" href="css/resources/cactus.png">
-<link href="css/ind.css" rel="stylesheet" /> 
+<link href="css/ind.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -22,7 +22,7 @@
 						class="field" />
 				</div>
 				<div>
-					<b>Enter password:</b> <input type="password" name="pass" id="pass"
+					<b>Enter password:</b> <input type="password" name="password" id="pass"
 						class="field" />
 				</div>
 				<div>
@@ -33,11 +33,13 @@
 			</form>
 		</div>
 
-		<div id="message">
+	 	<div id="message">
 			<c:if test="${message != null}">
 				<c:out value="Message: ${message}"></c:out>
 			</c:if>
-		</div>
+		</div> 
+
+
 
 	</div>
 
