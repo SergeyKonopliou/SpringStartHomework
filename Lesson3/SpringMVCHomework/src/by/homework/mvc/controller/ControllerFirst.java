@@ -2,6 +2,8 @@ package by.homework.mvc.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,16 +22,17 @@ public class ControllerFirst {
 	 * Отслеживает запрос на адрес http://localhost:8080/mvc/
 	 */
 
+	
 	@RequestMapping("")
-	public String start() {
+	public String start(Model model) {
 		return "index";
 	}
 
 	@PostMapping("/logg")
-	public String enterUser(@ModelAttribute @Valid User user, BindingResult binding, Model model,
+	public String enterUser(@ModelAttribute @Valid User user, BindingResult binding,
 			RedirectAttributes redirectAttributes) {
 		if (binding.hasErrors()) {
-			model.addAttribute("message", binding.getFieldError().getDefaultMessage());
+//			throw new NullPointerException("ошибочка екмакарек");
 			return "index";
 		}
 		// user добавляется в модель,но при redirect с метода POST на метод GET модель

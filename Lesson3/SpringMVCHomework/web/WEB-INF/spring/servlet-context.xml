@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:beans="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="
 	    http://www.springframework.org/schema/mvc 
 	    http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	    http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
@@ -27,11 +32,27 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 	</beans:bean>
 	
-	<context:component-scan base-package="by.homework.mvc.dao.impl" /> <!-- Сканирует данную дерикторию на бины -->
-	<context:component-scan base-package="by.homework.mvc.dao.util" />
-	<context:component-scan base-package="by.homework.mvc.model" />
-	<context:component-scan base-package="by.homework.mvc.service.impl" />
-	<context:component-scan base-package="by.homework.mvc.controller" />
-	<context:component-scan base-package="by.homework.mvc.controller.util" />
+	<!--Для загрузки сообщений валидации из файла имя_файла.properties  -->
+	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="/WEB-INF/messages"></beans:property>
+		<beans:property name="useCodeAsDefaultMessage" value="true"></beans:property>
+	</beans:bean>
 	
+	<!--Ловить исключения и перенаправлять на страницу ошибки -->
+<!-- 	<beans:bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<beans:property name="exceptionMappings">
+			<beans:map>
+				<beans:entry key="NullPointerException" value="error"/>
+			</beans:map>
+		</beans:property>
+		<beans:property name="defaultErrorView" value="error"></beans:property>		
+	</beans:bean> -->
+	
+	<context:component-scan base-package="by.homework.mvc.*" /> <!-- Сканирует данную дерикторию на бины -->
+	
+	<!-- Enable AspectJ style of Spring AOP -->
+<!-- 	<aop:aspectj-autoproxy /> -->
+	<!-- Кофигурация Aspect Beans, без этого Aspects advices не будут выполнятся -->
+	<beans:bean name="adviceException" class="by.homework.mvc.util.AdviceException" />
+		
 </beans:beans>

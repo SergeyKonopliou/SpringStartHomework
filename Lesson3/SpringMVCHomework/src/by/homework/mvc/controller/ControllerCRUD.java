@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import by.homework.mvc.controller.util.DecimalValidator;
 import by.homework.mvc.exception.ServiceException;
 import by.homework.mvc.model.Product;
 import by.homework.mvc.service.ProductService;
@@ -30,8 +29,6 @@ public class ControllerCRUD {
 	private String message;
 	private String message_action;
 	private List<Product> catalog = new ArrayList<>();
-	@Autowired
-	DecimalValidator validatorDec;
 	
 	@RequestMapping(value = "")
 	public String searchProduct(@RequestParam(defaultValue = "")String search_product,@RequestParam(value = "message_action",defaultValue = "View all products catalog")String message_act, Model model) {

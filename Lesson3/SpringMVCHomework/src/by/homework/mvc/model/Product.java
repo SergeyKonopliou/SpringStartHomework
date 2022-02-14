@@ -5,13 +5,14 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.stereotype.Component;
 
+
 @Component
 public class Product {
 
 	private Long id;
-	@NotEmpty(message = "Product's name is empty")
+	@NotEmpty(message = "name cannot be empty")
 	private String name;
-	@Min(value = 0,message = "Price not be less than 0")
+	@Min(value = 0,message = "price cannot be less than 0")
 	private double price;
 
 	public Product() {

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ page isELIgnored="false"%><!-- без этого jstl не работает -->
 <!DOCTYPE html>
 <html>
@@ -90,7 +92,8 @@
 		Action message:
 		<c:if test="${message_action != null}">
 			<c:out value='${message_action}'></c:out>
-		</c:if>
+		</c:if> 
+<%-- 		<form:errors path="product.*"/> --%>
 	</div>
 
 

@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class User {
 
-	@NotEmpty(message = "Name is empty")
-	@Size(max = 15,message = "Max name's size should be not more than 15 characters")
+	@NotEmpty()
+	@Size(max = 15)
 	private String name;
-	@NotEmpty(message = "Password not enter")
-	@Size(min = 4,max = 15,message = "Password's size should be 4 - 15 characters")
+	@NotEmpty()
+	@Size(min = 4,max = 15)
 	private String password;
 	
 	public String getName() {

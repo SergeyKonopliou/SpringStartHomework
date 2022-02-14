@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %> 
+ 
 <%@ page isELIgnored="false"%><!-- без этого jstl не работает -->
 <!DOCTYPE html>
 <html>
@@ -20,10 +22,14 @@
 				<div>
 					<b>Enter name:</b> <input type="text" name="name" id="name"
 						class="field" />
+					<span id = "message">
+					<form:errors path="user.name"/>
+					</span>	
 				</div>
 				<div>
 					<b>Enter password:</b> <input type="password" name="password" id="pass"
 						class="field" />
+					<span id = "message"><form:errors path="user.password"/></span>	
 				</div>
 				<div>
 					<input type="submit" name="Sign Up" id="enter" class="field"
@@ -32,15 +38,6 @@
 
 			</form>
 		</div>
-
-	 	<div id="message">
-			<c:if test="${message != null}">
-				<c:out value="Message: ${message}"></c:out>
-			</c:if>
-		</div> 
-
-
-
 	</div>
 
 </body>
