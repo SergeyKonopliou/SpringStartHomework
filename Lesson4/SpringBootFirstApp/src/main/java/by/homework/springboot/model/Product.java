@@ -14,6 +14,15 @@ public class Product {
 	private String name;
 	private Double price;
 	
+	public Product() {
+		super();
+	}
+	public Product(Long id, @NotEmpty @Size(min = 1, max = 15) String name, Double price) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+	}
 	public Long getId() {
 		return id;
 	}

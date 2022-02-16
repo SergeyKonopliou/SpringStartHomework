@@ -26,6 +26,7 @@
 		<c:if test="${list != null}">
 			<table>
 				<tr>
+					<th>#</th>
 					<th><spring:message code="label.productName" /></th>
 					<th><spring:message code="label.price" /></th>
 				</tr>
@@ -36,9 +37,7 @@
 						<td>"${product.price}"</td>
 						<td>
 							<button type="button" class="btn btn-primary mb-2"
-								onclick="window.location.href = '${product.id}/updateProduct?id=${product.id}&name=${product.name}&price=${product.price}'">Update</button>
-							<button type="button" class="btn btn-primary mb-2"
-								onclick="window.location.href = 'delete?id=${product.id}'">Delete</button>
+								onclick="window.location.href = 'delete/${product.id}'">Delete</button>
 						</td>
 					</tr>
 				</c:forEach>
